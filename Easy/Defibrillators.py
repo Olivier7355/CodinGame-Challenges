@@ -34,7 +34,6 @@ for i in range(n):
 nearest = defibralatorList[0][-1]
 answer = defibralatorList[0][1]
 
-#print("", file=sys.stderr, flush=True)
 # For each defibrilator in defibralatorList :
 for i in range(len(defibralatorList)) :
 
