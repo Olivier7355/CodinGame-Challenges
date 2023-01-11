@@ -1,25 +1,14 @@
 # https://www.codingame.com/ide/puzzle/1d-spreadsheet
-# Fail Test case 13 : Deep Birecursion
-# Error : Process has timed out. This may mean that 
-#         your solution is not optimized enough to handle some cases.
 
 import sys
 import math
 
 cellsList =[]
-
-# Each operation is assigned to a function that makes the calculation
-operation = {'ADD'  :lambda x,y:int(x)+int(y),
-             'SUB'  :lambda x,y:int(x)-int(y),
-             'MULT' :lambda x,y:int(x)*int(y),
-             'VALUE':lambda x,y:int(x)}
-
-# The function that calculate the values
-def computeCell(i) :
-    op, arg1, arg2 = cellsList[i]
-    if '$' in arg1 : arg1 = computeCell(int(arg1[1:]))
-    if '$' in arg2 : arg2 = computeCell(int(arg2[1:]))
-    return op(arg1,arg2)
+operation = {"ADD": (lambda x, y: x + y),
+             "SUB": (lambda x, y: x - y),
+             "MULT": (lambda x, y: x * y),
+             "VALUE":( lambda x, y: x)
+            }
 
 n = int(input())
 
@@ -27,12 +16,33 @@ n = int(input())
 for i in range(n):
     cell=[]
     op, arg_1, arg_2 = input().split()
-    cell.append(operation[op])
+    cell.append(op)
     cell.append(arg_1)
     cell.append(arg_2)
 
     cellsList.append(cell)
 
-# Call the funtion for each cell
+# Function that convert the arg1 and arg2 to integer
+def s2int(cellsList, s):
+    if s == "_":
+        return '_'
+    if "$" not in s:
+        return int(s)
+    else:
+        return computeCell(cellsList, int(s[1:]))
+
+V=[None]*n
+
+# Main function that calculates the values
+def computeCell(cellsList, i):
+    if V[i] is not None:
+        return V[i]
+    op, arg1, arg2 = cellsList[i]
+    x = s2int(cellsList, arg1)
+    y = s2int(cellsList, arg2)
+    V[i] = operation[op](x, y)
+    return V[i]
+
+# Iterate through the list of cells and calculate each value 
 for i in range(n):
-    print(computeCell(i))
+    print(computeCell(cellsList,i))
