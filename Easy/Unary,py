@@ -1,0 +1,35 @@
+import sys
+import math
+
+message = input()
+
+strng =''
+
+for char in message :
+    b = bytes([ord(char)])
+    theByte = bin(b[0])
+    theByte = theByte[2:]
+    if len(theByte) < 7 : strng += '0'
+    strng += theByte
+    
+result = []
+current_series = [strng[0]]
+
+for i in range(1, len(strng)):
+    if strng[i] == strng[i-1]:
+        current_series.append(strng[i])
+    else:
+        result.append(current_series)
+        current_series = [strng[i]]
+
+result.append(current_series)
+    
+codedList = ''
+for i in range(len(result)) :
+    if result[i][0] == '1' : codedList += '0 '
+    else : codedList += '00 '
+    for j in range(len(result[i])) :
+        codedList += '0'
+    if i < len(result)-1 : codedList += ' '
+        
+print(codedList)
