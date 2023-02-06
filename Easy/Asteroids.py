@@ -9,6 +9,8 @@ asteroidCoordinatet1 = [1000,1000]
 asteroidCoordinatet2 = [1000,1000]
 movex, movey = '', ''
 deltax, deltay = 0, 0
+t3x, t3y = 0, 0
+coordinateTable ={'':0, 'North':-1, 'South':1, 'East':1, 'West':-1}
 
 w, h, t1, t2, t3 = [int(i) for i in theInput.split()]
 
@@ -50,7 +52,14 @@ deltay = abs(asteroidCoordinatet1[1] - asteroidCoordinatet2[1])
 
 print('Direction :', movex, movey)
 print('Delta :', deltax, deltay)
+
+t3x = asteroidCoordinatet2[0] + (coordinateTable[movex] * deltax)
+t3y = asteroidCoordinatet2[1] + (coordinateTable[movey] * deltay)
+print('T3 :', t3x, t3y)
     
+thirdPictureList = [['.']*w]*h
+thirdPictureList[0][2] = 'A'
+print(thirdPictureList)
 # Apply the delta between t2 and t3 and find the new coordinate
     
 # Check if there already is an asteroid at the final coordinates
