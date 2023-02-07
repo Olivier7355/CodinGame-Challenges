@@ -57,9 +57,13 @@ t3x = asteroidCoordinatet2[0] + (coordinateTable[movex] * deltax)
 t3y = asteroidCoordinatet2[1] + (coordinateTable[movey] * deltay)
 print('T3 :', t3x, t3y)
     
-thirdPictureList = [['.']*w]*h
-thirdPictureList[0][2] = 'A'
-print(thirdPictureList)
+thirdPictureList = ['.'*w]*h
+
+new_character = 'A'
+temp = list(thirdPictureList[t3y]) 
+temp[t3x] = new_character
+thirdPictureList[t3y] = "".join(temp)
+
 # Apply the delta between t2 and t3 and find the new coordinate
     
 # Check if there already is an asteroid at the final coordinates
