@@ -1,9 +1,30 @@
 # IN PROGRES...........................
 
 
-theInput = '5 5 1 2 3'
-firstPictureList = ['A....', '.....', '.....', '.....', '.....']
-secondPictureList = ['.A...', '.....', '.....', '.....', '.....']
+theInput = '6 6 1 5 6'
+
+#Testcase1
+#firstPictureList = ['A....', '.....', '.....', '.....', '.....']
+#secondPictureList = ['.A...', '.....', '.....', '.....', '.....']
+
+#Testcase2
+#firstPictureList = ['A....', '.....', '.....', '.....', '.....']
+#secondPictureList = ['.....', 'A....', '.....', '.....', '.....']
+
+#Testcase3
+#firstPictureList = ['A....', '.....', '.....', '.....', '.....']
+#secondPictureList = ['.....', '.A...', '.....', '.....', '.....']
+
+#Testcase4
+#firstPictureList = ['.....', '.....', '..A..', '.....', '.....']
+#secondPictureList = ['.....', '.A...', '.....', '.....', '.....']
+
+#Testcase5
+firstPictureList = ['A.....', '......', '......', '......', '......', '......']
+secondPictureList = ['....A.', '......', '......', '......', '......', '......']
+
+
+
 thirdPictureList = []
 asteroidCoordinatet1 = [1000,1000]
 asteroidCoordinatet2 = [1000,1000]
@@ -15,8 +36,8 @@ coordinateTable ={'':0, 'North':-1, 'South':1, 'East':1, 'West':-1}
 w, h, t1, t2, t3 = [int(i) for i in theInput.split()]
 
 # For each asteroid in firstPictureList :
-for row in range(4) :
-    for column in range(4) :
+for row in range(h-1) :
+    for column in range(w-1) :
         
         # Scan map t1
         if (firstPictureList[row][column] != '.') and (asteroidCoordinatet1[0] == 1000) :
@@ -30,21 +51,11 @@ for row in range(4) :
 
 print(asteroidCoordinatet1, asteroidCoordinatet2)
 
-# Move East or West ?
-if (asteroidCoordinatet1[1] == asteroidCoordinatet2[1]) :
-    
-    # Move East
-    if (asteroidCoordinatet1[0] < asteroidCoordinatet2[0]) : movex = 'East'
-    # Move West
-    else : movex ='West'
+if (asteroidCoordinatet1[0] < asteroidCoordinatet2[0]) : movex = 'East'
+elif (asteroidCoordinatet1[0] > asteroidCoordinatet2[0]) : movex = 'West'
 
-# Move North or South ?
-if (asteroidCoordinatet1[0] == asteroidCoordinatet2[0]) :
-    
-    # Move South
-    if (asteroidCoordinatet1[1] < asteroidCoordinatet2[1]) : movey = 'South'
-    # Move North
-    else : movey ='North'
+if (asteroidCoordinatet1[1] < asteroidCoordinatet2[1]) : movey = 'South'
+elif (asteroidCoordinatet1[1] > asteroidCoordinatet2[1]) : movey = 'North'
     
 # Find the number of steps (delta) between t1 and t2
 deltax = abs(asteroidCoordinatet1[0] - asteroidCoordinatet2[0])
@@ -64,11 +75,6 @@ temp = list(thirdPictureList[t3y])
 temp[t3x] = new_character
 thirdPictureList[t3y] = "".join(temp)
 
-# Apply the delta between t2 and t3 and find the new coordinate
-    
-# Check if there already is an asteroid at the final coordinates
-    
-# Set the final coordinate if it is the closest asteroid (ord(asteroid))  
 
 # Print t3
 for eachLine in thirdPictureList :
