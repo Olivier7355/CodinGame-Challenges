@@ -56,9 +56,10 @@ coordinateTable ={'':0, 'North':-1, 'South':1, 'East':1, 'West':-1}
 w, h, t1, t2, t3 = [int(i) for i in theInput.split()]
 
 # Find all the letters that are on the map and save in a list
-for row in range(h-1) :
-    for column in range(w-1) :
+for row in range(h) :
+    for column in range(w) :
         if (firstPictureList[row][column] != '.') and (firstPictureList[row][column] not in alphabet) : alphabet.append(firstPictureList[row][column])
+        #print(firstPictureList[row][column])
         
 # Start the loop from Z to A
 alphabet.sort()
@@ -76,8 +77,8 @@ for letter in range(len(alphabet)) :
     deltax, deltay = 0, 0
     t3x, t3y = 0, 0
     
-    for row in range(h-1) :
-        for column in range(w-1) :
+    for row in range(h) :
+        for column in range(w) :
             
             # Scan map t1
             if (firstPictureList[row][column] == alphabet[letter]) and (asteroidCoordinatet1[0] == 10000) :
